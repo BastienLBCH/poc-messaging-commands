@@ -19,10 +19,18 @@ def get_jwt_token():
 
 class AuthentificationTestCase(TestCase):
     def test_user_send_unauthenticated_request(self):
+        """
+        Test that a request is not executed if the JWT is not valid
+        :return:
+        """
         response = client.get(reverse("instantMessages:index"))
         self.assertIs(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_send_authenticated_request(self):
+        """
+        Test that a request is executed if the JWT is valid
+        :return:
+        """
         token = get_jwt_token()
         headers = {'Authorization': f'Bearer {token}'}
         response = client.get(reverse("instantMessages:index"), headers=headers)
