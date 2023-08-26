@@ -27,7 +27,7 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w#md&t%r&^hiiei(jievgaxd7zig&j=$e$1t=^5qcbv8ih*4k_'
+SECRET_KEY = 'django-insecure-^^oiq6vof=eive%gh*++_*2vz*c&(4e@rta*8#h%g!y1-@!g8x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'instantMessages.apps.InstantmessagesConfig'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+
 KEYCLOAK_PUBLIC_KEY = env("KEYCLOAK_PUBLIC_KEY")
 KEYCLOAK_ALG = env("KEYCLOAK_ALG")
-
+CLIENT_ID = env("CLIENT_ID")
+USERNAME_TEST = env("USERNAME_TEST")
+PASSWORD_TEST = env("PASSWORD_TEST")
+KEYCLOAK_TOKEN_URL = env("KEYCLOAK_TOKEN_URL")

@@ -1,6 +1,6 @@
 from django.conf import settings
-import requests
-import json
+from django.http import HttpResponse
+from rest_framework import status
 import jwt
 
 
@@ -16,15 +16,17 @@ class JWTAuthentificationMiddleware:
     def __call__(self, request):
         """
         Middleware verifying each request is identified
+        If user is authentified execute view normally, else returns http error 401
         :param request:
         :return:
         """
 
-        bearer = request.headers["Authorization"].split(" ")[1]
-
-        payload = None
-        key = '-----BEGIN PUBLIC KEY-----\n' + keycloak_public_key + '\n-----END PUBLIC KEY-----'
         try:
+            bearer = request.headers["Authorization"].split(" ")[1]
+
+            payload = None
+            key = '-----BEGIN PUBLIC KEY-----\n' + keycloak_public_key + '\n-----END PUBLIC KEY-----'
+
             payload = jwt.decode(
                 bearer,
                 key,
@@ -32,13 +34,9 @@ class JWTAuthentificationMiddleware:
                 audience="account"
             )
         except Exception:
-            raise Exception("User is not correctly logged in")
-
-        print(payload)
+            return HttpResponse("User is not correctly authentified", status=status.HTTP_401_UNAUTHORIZED)
 
         response = self.get_response(request)
 
-        # Code to be executed for each request/response after
-        # the view is called.
-
         return response
+
