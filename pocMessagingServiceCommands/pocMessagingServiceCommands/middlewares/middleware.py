@@ -22,7 +22,9 @@ class JWTAuthentificationMiddleware:
         """
 
         try:
-            bearer = request.headers["Authorization"].split(" ")[1]
+            name, bearer = request.headers["Authorization"].split(" ")
+            if name != "Bearer":
+                raise Exception
 
             payload = None
             key = '-----BEGIN PUBLIC KEY-----\n' + keycloak_public_key + '\n-----END PUBLIC KEY-----'

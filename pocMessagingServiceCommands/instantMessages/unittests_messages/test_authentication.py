@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from rest_framework import status
 from django.conf import settings
-import json
+from django.urls import reverse
 import requests
 
 client = Client()
@@ -19,13 +19,13 @@ def get_jwt_token():
 
 class AuthentificationTestCase(TestCase):
     def test_user_send_unauthenticated_request(self):
-        response = client.get("/messages/")
+        response = client.get(reverse("instantMessages:index"))
         self.assertIs(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_send_authenticated_request(self):
         token = get_jwt_token()
         headers = {'Authorization': f'Bearer {token}'}
-        response = client.get("/messages/", headers=headers)
+        response = client.get(reverse("instantMessages:index"), headers=headers)
         self.assertIs(response.status_code, status.HTTP_200_OK)
 
 
