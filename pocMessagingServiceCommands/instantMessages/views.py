@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 
-from .serializers.conversations import UserCreatedConversationSerializerCreate, UserCreatedConversationModelSerializer
+from .serializers.serializers import UserCreatedConversationModelSerializer, UserAddedParticipantToConversationModelSerializer
 import jwt
 
 
@@ -12,9 +12,9 @@ def index(request):
 
 
 @api_view(["POST"])
-def conversations(request):
+def userCreatedConversation(request):
     """
-    create a new conversation
+    Register an event signaling the user created a conversation
     :param request:
     :return:
     """
@@ -32,8 +32,22 @@ def conversations(request):
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(["POST"])
+def userAddedParticipantToConversation(request):
+    """
+    Register an event that a user added a participant to a conversation
+    :param request:
+    :return:
+    """
+    name, token = request.headers["Authorization"].split(" ")
+    data = request.data.copy()
+    data["user_id"] = jwt.decode(token, options={"verify_signature": False})["sub"]
 
-
+    serializer = UserAddedParticipantToConversationModelSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 

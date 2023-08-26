@@ -5,5 +5,6 @@ from . import views
 app_name = "instantMessages"
 urlpatterns = [
     path("", views.index, name="index"),
-    path("conversations/", views.conversations, name="conversations")
+    path("conversations/", views.userCreatedConversation, name="conversations"),
+    path("conversations/participants", views.userAddedParticipantToConversation, name="addparticipant")
 ]
