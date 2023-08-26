@@ -24,7 +24,7 @@ def get_jwt_token():
     return r.json()["access_token"]
 
 
-class AddParticipantTestCase(TestCase):
+class SendMessageTestCase(TestCase):
     def setUp(self):
         # Get JWT
         self.token = get_jwt_token()
@@ -36,7 +36,7 @@ class AddParticipantTestCase(TestCase):
         body = {
             "name": "conversation_test"
         }
-        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        r = client.post(reverse("instantMessages:createconversations"), body, headers=headers)
         self.conversation_id = json.loads(r.content.decode())["id"]
 
     def test_user_send_message_to_conversation(self):

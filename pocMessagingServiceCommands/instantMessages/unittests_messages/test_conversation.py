@@ -43,7 +43,7 @@ class CreateConversationTestCase(TestCase):
         body = {
             "name": "conversation_test"
         }
-        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        r = client.post(reverse("instantMessages:createconversations"), body, headers=headers)
 
         self.assertIs(r.status_code, status.HTTP_201_CREATED)
 
@@ -61,7 +61,7 @@ class CreateConversationTestCase(TestCase):
         body = {
         }
 
-        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        r = client.post(reverse("instantMessages:createconversations"), body, headers=headers)
 
         self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -78,7 +78,7 @@ class DeleteConversationTestCase(TestCase):
         body = {
             "name": "conversation_test"
         }
-        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        r = client.post(reverse("instantMessages:createconversations"), body, headers=headers)
         self.conversation_id = json.loads(r.content.decode())["id"]
 
     def test_authenticated_user_delete_conversation(self):
@@ -126,7 +126,7 @@ class AddParticipantTestCase(TestCase):
         body = {
             "name": "conversation_test"
         }
-        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        r = client.post(reverse("instantMessages:createconversations"), body, headers=headers)
         self.conversation_id = json.loads(r.content.decode())["id"]
 
     def test_user_add_participant_to_conversation(self):
@@ -175,7 +175,7 @@ class RemoveParticipantTestCase(TestCase):
         body = {
             "name": "conversation_test"
         }
-        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        r = client.post(reverse("instantMessages:createconversations"), body, headers=headers)
         self.conversation_id = json.loads(r.content.decode())["id"]
 
     def test_user_remove_participant_to_conversation(self):

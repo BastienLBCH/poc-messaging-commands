@@ -23,7 +23,7 @@ class AuthentificationTestCase(TestCase):
         Test that a request is not executed if the JWT is not valid
         :return:
         """
-        response = client.get(reverse("instantMessages:index"))
+        response = client.get(reverse("instantMessages:test"))
         self.assertIs(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_send_authenticated_request(self):
@@ -33,7 +33,7 @@ class AuthentificationTestCase(TestCase):
         """
         token = get_jwt_token()
         headers = {'Authorization': f'Bearer {token}'}
-        response = client.get(reverse("instantMessages:index"), headers=headers)
+        response = client.get(reverse("instantMessages:test"), headers=headers)
         self.assertIs(response.status_code, status.HTTP_200_OK)
 
 

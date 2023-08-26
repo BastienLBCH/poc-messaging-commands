@@ -92,7 +92,7 @@ def userSentMessageToConversation(request):
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(["POST"])
+@api_view(['POST'])
 def userDeletedConversation(request):
     """
     Register an event that a user added a participant to a conversation
