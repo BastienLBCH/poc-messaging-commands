@@ -115,6 +115,55 @@ class AddParticipantTestCase(TestCase):
         self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class RemoveParticipantTestCase(TestCase):
+    def setUp(self):
+        # Get JWT
+        self.token = get_jwt_token()
+
+        # Create a conversation for testing
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        body = {
+            "name": "conversation_test"
+        }
+        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        self.conversation_id = json.loads(r.content.decode())["id"]
+
+    def test_user_remove_participant_to_conversation(self):
+        """
+        Test user remove a valid participant to a valid conversation
+        :return:
+        """
+
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        body = {
+            "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0",
+            "conversation_id": self.conversation_id
+        }
+        r = client.post(reverse("instantMessages:removeparticipant"), body, headers=headers)
+
+        self.assertIs(r.status_code, status.HTTP_201_CREATED)
+
+    def test_user_remove_participant_to_conversation_with_missing_field(self):
+        """
+        Test user remove a valid participant to a valid conversation
+        :return:
+        """
+
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        body = {
+            "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0"
+        }
+        r = client.post(reverse("instantMessages:removeparticipant"), body, headers=headers)
+
+        self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
+
+
 
 
 
