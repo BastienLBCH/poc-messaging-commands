@@ -3,7 +3,8 @@ from ..models import \
     UserCreatedConversation, \
     UserAddedParticipantToConversation, \
     UserRemovedParticipantToConversation, \
-    UserSentMessageToConversation
+    UserSentMessageToConversation, \
+    UserDeletedConversation
 
 
 # Serializer for the even generated when a user creates a conversation
@@ -46,6 +47,16 @@ class UserSentMessageToConversationModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSentMessageToConversation
+        fields = "__all__"
+
+
+# Serializer for the event generated when a user deleted a conversation
+class UserDeletedConversationModelSerializer(serializers.ModelSerializer):
+    user_id = serializers.CharField(required=True)
+    conversation_id = serializers.CharField(required=True)
+
+    class Meta:
+        model = UserDeletedConversation
         fields = "__all__"
 
 

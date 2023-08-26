@@ -9,4 +9,5 @@ urlpatterns = [
     path("conversations/participants", views.userAddedParticipantToConversation, name="addparticipant"),
     path("conversations/participants", views.userRemovedParticipantToConversation, name="removeparticipant"),
     path("conversations/messages", views.userSentMessageToConversation, name="sendmessage"),
+    path("conversations/delete", views.userDeletedConversation, name="deleteconversation"),
 ]

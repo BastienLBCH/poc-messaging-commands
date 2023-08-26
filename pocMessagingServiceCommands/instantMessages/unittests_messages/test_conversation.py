@@ -66,6 +66,54 @@ class CreateConversationTestCase(TestCase):
         self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class DeleteConversationTestCase(TestCase):
+    def setUp(self):
+        # Get JWT
+        self.token = get_jwt_token()
+
+        # Create a conversation for testing
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        body = {
+            "name": "conversation_test"
+        }
+        r = client.post(reverse("instantMessages:conversations"), body, headers=headers)
+        self.conversation_id = json.loads(r.content.decode())["id"]
+
+    def test_authenticated_user_delete_conversation(self):
+        """
+        Test that an authenticated user is able to create a conversation
+        Expecting 201 created
+        :return:
+        """
+        user_id = jwt.decode(self.token, options={"verify_signature": False})["sub"]
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        body = {
+            "conversation_id": self.conversation_id
+        }
+        r = client.post(reverse("instantMessages:deleteconversation"), body, headers=headers)
+
+        self.assertIs(r.status_code, status.HTTP_201_CREATED)
+
+    def test_authenticated_user_delete_conversation_with_missing_field(self):
+        """
+        Test that an authenticated user is able to create a conversation
+        Expecting 201 created
+        :return:
+        """
+        user_id = jwt.decode(self.token, options={"verify_signature": False})["sub"]
+        headers = {
+            'Authorization': f'Bearer {self.token}'
+        }
+        body = {}
+        r = client.post(reverse("instantMessages:deleteconversation"), body, headers=headers)
+
+        self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
+
+
 class AddParticipantTestCase(TestCase):
     def setUp(self):
         # Get JWT
