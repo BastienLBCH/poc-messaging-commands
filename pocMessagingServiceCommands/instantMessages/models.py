@@ -24,6 +24,12 @@ class UserRemovedParticipantToConversation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
+class UserSentMessageToConversation(models.Model):
+    user_id = models.CharField(max_length=100)
+    conversation_id = models.CharField(max_length=100)
+    message_content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 
 
