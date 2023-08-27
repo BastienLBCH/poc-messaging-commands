@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'pocMessagingServiceCommands.middlewares.authmiddleware.JWTAuthentificationMiddleware',
+    'pocMessagingServiceCommands.middlewares.publishingeventmiddleware.PublishingMiddleware',
 ]
 
 ROOT_URLCONF = 'pocMessagingServiceCommands.urls'
@@ -140,3 +141,6 @@ CLIENT_ID = env("CLIENT_ID")
 USERNAME_TEST = env("USERNAME_TEST")
 PASSWORD_TEST = env("PASSWORD_TEST")
 KEYCLOAK_TOKEN_URL = env("KEYCLOAK_TOKEN_URL")
+
+KAFKA_BOOTSTRAP_SERVER = env("BOOTSTRAP_SERVERS")
+TOPIC = env("TOPIC")
