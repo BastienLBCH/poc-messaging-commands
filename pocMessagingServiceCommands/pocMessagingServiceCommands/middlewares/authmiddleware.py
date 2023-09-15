@@ -5,7 +5,7 @@ import jwt
 
 
 keycloak_public_key = settings.KEYCLOAK_PUBLIC_KEY
-keycloak_alg=settings.KEYCLOAK_ALG
+keycloak_alg = settings.KEYCLOAK_ALG
 
 
 class JWTAuthentificationMiddleware:

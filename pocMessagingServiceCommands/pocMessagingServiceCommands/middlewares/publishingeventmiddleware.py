@@ -12,7 +12,7 @@ def delivery_callback(err, msg):
     if err:
         print('ERROR: Message failed delivery: {}'.format(err))
     else:
-        print(f"Produced event to topic {topic} \n{msg.key().decode('utf-8')}: {msg.value().decode('utf-8')}")
+        print(f"Produced event to topic {topic} \n{msg.key().decode('utf-8')}: {msg.value().decode('utf-8')} \n\n")
 
 
 class PublishingMiddleware:
@@ -32,7 +32,8 @@ class PublishingMiddleware:
 
         key = "event"
         message = response.content.decode()
-        producer.produce(topic, message, key, callback=delivery_callback)
+        if 'event' in json.loads(message):
+            producer.produce(topic, message, key, callback=delivery_callback)
 
         # Block until the messages are sent.
         producer.poll(10000)

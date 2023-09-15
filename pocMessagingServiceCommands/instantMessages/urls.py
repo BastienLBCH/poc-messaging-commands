@@ -8,6 +8,6 @@ urlpatterns = [
     path("createconversation/", views.userCreatedConversation, name="createconversations"),
     path("deleteconversation/", views.userDeletedConversation, name="deleteconversation"),
     path("addparticipant/", views.userAddedParticipantToConversation, name="addparticipant"),
-    path("removeparticipants", views.userRemovedParticipantToConversation, name="removeparticipant"),
+    path("removeparticipants/", views.userRemovedParticipantToConversation, name="removeparticipant"),
     path("sendmessages/", views.userSentMessageToConversation, name="sendmessage"),
 ]

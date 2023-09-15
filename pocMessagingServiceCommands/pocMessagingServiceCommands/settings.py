@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-^^oiq6vof=eive%gh*++_*2vz*c&(4e@rta*8#h%g!y1-@!g8x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -117,8 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
-
-USE_I18N = True
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
+USE_I18N = False
 
 USE_TZ = True
 
@@ -144,3 +145,5 @@ KEYCLOAK_TOKEN_URL = env("KEYCLOAK_TOKEN_URL")
 
 KAFKA_BOOTSTRAP_SERVER = env("BOOTSTRAP_SERVERS")
 TOPIC = env("TOPIC")
+
+CORS_ORIGIN_ALLOW_ALL = True

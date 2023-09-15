@@ -1,8 +1,9 @@
+import requests
+
 from django.test import TestCase, Client
 from rest_framework import status
 from django.conf import settings
 from django.urls import reverse
-import requests
 
 client = Client()
 
