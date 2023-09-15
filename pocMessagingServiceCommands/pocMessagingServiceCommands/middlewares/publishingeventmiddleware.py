@@ -30,6 +30,8 @@ class PublishingMiddleware:
 
         response = self.get_response(request)
 
+        print(f"\n###\n{response}\n###\n")
+
         key = "event"
         message = response.content.decode()
         if 'event' in json.loads(message):

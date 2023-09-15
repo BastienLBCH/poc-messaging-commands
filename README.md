@@ -72,7 +72,7 @@ This API provides endpoints to create conversations, post messages and add a par
 
 
 ### Create a conversation
-- **Endpoint**: /conversations/createconversation/
+- **Endpoint**: /conversations/
 - **Method**: POST
 
 Headers :
@@ -91,7 +91,7 @@ Body :
 
 
 ### Add user to a conversation
-- **Endpoint**: /conversations/addparticipant/
+- **Endpoint**: /conversations/{conversation id}/participants
 - **Method**: POST
 
 Headers :
@@ -107,14 +107,13 @@ Body :
 | Attribute       |                                                 Value |
 |:----------------|------------------------------------------------------:|
 | participant_id  |           {Id of the user to add to the conversation} |
-| conversation_id | {Id of the conversation of the user has been added to |
 
 
 
 
 
 ### Send a message to a conversation
-- **Endpoint**: /conversations/sendmessages/
+- **Endpoint**: /conversations/{conversation id}
 - **Method**: POST
 
 Headers :
@@ -130,7 +129,6 @@ Body :
 | Attribute        |                                                 Value |
 |:-----------------|------------------------------------------------------:|
 | message_content  |                 {Message to send to the conversation} |
-| conversation_id  | {Id of the conversation of the user has been added to |
 
 
 

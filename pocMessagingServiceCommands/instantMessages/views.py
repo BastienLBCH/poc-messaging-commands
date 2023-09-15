@@ -39,7 +39,7 @@ def userCreatedConversation(request):
 
 
 @api_view(["POST"])
-def userAddedParticipantToConversation(request):
+def userAddedParticipantToConversation(request, conversation_id):
     """
     Register an event that a user added a participant to a conversation
     :param request:
@@ -48,6 +48,7 @@ def userAddedParticipantToConversation(request):
     name, token = request.headers["Authorization"].split(" ")
     data = request.data.copy()
     data["user_id"] = jwt.decode(token, options={"verify_signature": False})["sub"]
+    data["conversation_id"] = conversation_id
 
     serializer = UserAddedParticipantToConversationModelSerializer(data=data)
     if serializer.is_valid():
@@ -75,7 +76,7 @@ def userRemovedParticipantToConversation(request):
 
 
 @api_view(["POST"])
-def userSentMessageToConversation(request):
+def userSentMessageToConversation(request, conversation_id):
     """
     Register an event that a user sent a message to a conversation
     :param request:
@@ -84,16 +85,18 @@ def userSentMessageToConversation(request):
     name, token = request.headers["Authorization"].split(" ")
     data = request.data.copy()
     data["user_id"] = jwt.decode(token, options={"verify_signature": False})["sub"]
+    data["conversation_id"] = conversation_id
 
     serializer = UserSentMessageToConversationModelSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
+
     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-def userDeletedConversation(request):
+@api_view(['DELETE'])
+def userDeletedConversation(request, conversation_id):
     """
     Register an event that a user added a participant to a conversation
     :param request:
@@ -102,6 +105,7 @@ def userDeletedConversation(request):
     name, token = request.headers["Authorization"].split(" ")
     data = request.data.copy()
     data["user_id"] = jwt.decode(token, options={"verify_signature": False})["sub"]
+    data["conversation_id"] = conversation_id
 
     serializer = UserDeletedConversationModelSerializer(data=data)
     if serializer.is_valid():
