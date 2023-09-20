@@ -1,5 +1,6 @@
 # Poc Messaging Service CQRS command part
-This code is a proof of concept. Meaning it is not designed to be technically perfect, it is the first time I use these design patterns and I am exploring it.
+This code is a proof of concept. 
+Meaning it is not designed to be technically perfect (e.g. it uses a sqlite database) and it is the first time I use these design patterns.
 
 It's part of an instant messaging service designed with the CQRS designed pattern combined with event sourcing.
 
