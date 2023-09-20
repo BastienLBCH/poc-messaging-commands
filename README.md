@@ -1,6 +1,7 @@
 # Poc Messaging Service CQRS command part
 This code is a proof of concept. 
-Meaning it is not designed to be technically perfect (e.g. it uses a sqlite database) and it is the first time I use these design patterns.
+Meaning it's not made to run on a production environment (e.g. it uses a sqlite database) 
+and it is also the first time I use these design patterns.
 
 It's part of an instant messaging service designed with the CQRS designed pattern combined with event sourcing.
 
@@ -59,10 +60,11 @@ PASSWORD_TEST=azerty
 ### Building and deploying
 
 > [!IMPORTANT]
-> This repo is only one "service" of the whole project and requires :
+> This repo is only one "service" of the whole project, if you want to really test it you need :
 > - [The query part](https://github.com/BastienLBCH/poc-messaging-service-queries) 
 > - Kafka
 > - Keycloak
+> 
 > To be configured and runnning
 
 You can easily deploy this service using docker using these commands in the project root directory:
