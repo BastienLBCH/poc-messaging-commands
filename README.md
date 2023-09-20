@@ -59,7 +59,7 @@ PASSWORD_TEST=azerty
 
 > [!IMPORTANT]
 > This repo is only one "service" of the whole project and requires :
-> - [The query part]{https://github.com/BastienLBCH/poc-messaging-service-queries} 
+> - [The query part](https://github.com/BastienLBCH/poc-messaging-service-queries) 
 > - Kafka
 > - Keycloak
 > To be configured and runnning
