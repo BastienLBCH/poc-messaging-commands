@@ -57,6 +57,13 @@ PASSWORD_TEST=azerty
 
 ### Building and deploying
 
+> [!IMPORTANT]
+> This repo is only one "service" of the whole project and requires :
+> - [The query part]{https://github.com/BastienLBCH/poc-messaging-service-queries} 
+> - Kafka
+> - Keycloak
+> To be configured and runnning
+
 You can easily deploy this service using docker using these commands in the project root directory:
 ```bash
 docker build . -t poc-messaging-service-command
