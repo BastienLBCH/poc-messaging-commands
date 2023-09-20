@@ -59,11 +59,11 @@ PASSWORD_TEST=azerty
 
 You can easily deploy this service using docker using these commands in the project root directory:
 ```bash
-docker build . -t PocMessagingServiceCommandPart
+docker build . -t poc-messaging-service-command
 ```
 then
 ```bash 
-docker run -p 8000:8000 PocMessagingServiceCommandPart 
+docker run -p 8000:8000 --name poc-messaging-service-command poc-messaging-service-command 
 ```
 
 
