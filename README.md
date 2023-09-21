@@ -1,4 +1,4 @@
-# Poc Messaging Service CQRS command part
+# Poc Messaging Service CQRS commands part
 This code is a proof of concept. 
 Meaning it's not made to run on a production environment (e.g. it uses a sqlite database) 
 and it is also the first time I use these design patterns.
