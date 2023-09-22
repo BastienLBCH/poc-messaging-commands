@@ -1,7 +1,10 @@
+import json
+
 from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from rest_framework import status
+from rest_framework.response import Response
 
 from .serializers.serializers import \
     UserCreatedConversationModelSerializer, \
@@ -13,8 +16,9 @@ from .serializers.serializers import \
 import jwt
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the messages index.")
+@api_view(["GET"])
+def test(request):
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(["POST"])
@@ -58,7 +62,7 @@ def userAddedParticipantToConversation(request, conversation_id):
 
 
 @api_view(["POST"])
-def userRemovedParticipantToConversation(request):
+def userRemovedParticipantToConversation(request, conversation_id, participant_id):
     """
     Register an event that a user removed a participant to a conversation
     :param request:
@@ -67,6 +71,8 @@ def userRemovedParticipantToConversation(request):
     name, token = request.headers["Authorization"].split(" ")
     data = request.data.copy()
     data["user_id"] = jwt.decode(token, options={"verify_signature": False})["sub"]
+    data["conversation_id"] = conversation_id
+    data["participant_id"] = participant_id
 
     serializer = UserRemovedParticipantToConversationModelSerializer(data=data)
     if serializer.is_valid():

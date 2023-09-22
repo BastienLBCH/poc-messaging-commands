@@ -30,16 +30,18 @@ class PublishingMiddleware:
 
         response = self.get_response(request)
 
-        print(f"\n###\n{response}\n###\n")
-
         key = "event"
         message = response.content.decode()
-        if 'event' in json.loads(message):
-            producer.produce(topic, message, key, callback=delivery_callback)
 
-        # Block until the messages are sent.
-        producer.poll(10000)
-        producer.flush()
+        try:
+            if 'event' in json.loads(message):
+                producer.produce(topic, message, key, callback=delivery_callback)
+
+                # Block until the messages are sent.
+                producer.poll(10000)
+                producer.flush()
+        except Exception:
+            pass
 
         return response
 

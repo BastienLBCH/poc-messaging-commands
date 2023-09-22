@@ -100,6 +100,13 @@ Body :
 | name      | {conversation name} |
 
 
+### Delete a conversation
+- **Endpoint**: /conversations/{conversation id}/delete
+- **Method**: DELETE
+
+
+
+
 ### Add user to a conversation
 - **Endpoint**: /conversations/{conversation id}/participants
 - **Method**: POST

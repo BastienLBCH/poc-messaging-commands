@@ -191,25 +191,20 @@ class RemoveParticipantTestCase(TestCase):
             "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0",
             "conversation_id": self.conversation_id
         }
-        r = client.post(reverse("instantMessages:removeparticipant"), body, headers=headers)
+        r = client.post(
+            reverse(
+                "instantMessages:removeparticipant",
+                kwargs={
+                    'conversation_id': self.conversation_id,
+                    'participant_id': "d8c2ec28-b43a-4259-99fa-924be1bf4ac0"
+                }
+            ),
+            body,
+            headers=headers
+        )
 
         self.assertIs(r.status_code, status.HTTP_201_CREATED)
 
-    def test_user_remove_participant_to_conversation_with_missing_field(self):
-        """
-        Test user remove a valid participant to a valid conversation
-        :return:
-        """
-
-        headers = {
-            'Authorization': f'Bearer {self.token}'
-        }
-        body = {
-            "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0"
-        }
-        r = client.post(reverse("instantMessages:removeparticipant"), body, headers=headers)
-
-        self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 

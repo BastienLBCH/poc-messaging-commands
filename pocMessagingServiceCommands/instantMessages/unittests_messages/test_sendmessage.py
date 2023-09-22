@@ -52,7 +52,11 @@ class SendMessageTestCase(TestCase):
             "conversation_id": self.conversation_id,
             "message_content": "Salut les copains"
         }
-        r = client.post(reverse("instantMessages:sendmessage"), body, headers=headers)
+        r = client.post(
+            reverse("instantMessages:sendmessage", kwargs={'conversation_id': self.conversation_id}),
+            body,
+            headers=headers
+        )
 
         self.assertIs(r.status_code, status.HTTP_201_CREATED)
 
@@ -65,9 +69,11 @@ class SendMessageTestCase(TestCase):
         headers = {
             'Authorization': f'Bearer {self.token}'
         }
-        body = {
-            "conversation_id": self.conversation_id
-        }
-        r = client.post(reverse("instantMessages:sendmessage"), body, headers=headers)
+        body = {}
+        r = client.post(
+            reverse("instantMessages:sendmessage", kwargs={'conversation_id': self.conversation_id}),
+            body,
+            headers=headers
+        )
 
         self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)

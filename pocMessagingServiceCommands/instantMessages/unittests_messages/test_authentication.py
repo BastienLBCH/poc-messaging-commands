@@ -34,6 +34,7 @@ class AuthentificationTestCase(TestCase):
         """
         token = get_jwt_token()
         headers = {'Authorization': f'Bearer {token}'}
+
         response = client.get(reverse("instantMessages:test"), headers=headers)
         self.assertIs(response.status_code, status.HTTP_200_OK)
 
