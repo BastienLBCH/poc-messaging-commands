@@ -87,31 +87,19 @@ class DeleteConversationTestCase(TestCase):
         Expecting 201 created
         :return:
         """
-        user_id = jwt.decode(self.token, options={"verify_signature": False})["sub"]
-        headers = {
-            'Authorization': f'Bearer {self.token}'
-        }
-        body = {
-            "conversation_id": self.conversation_id
-        }
-        r = client.post(reverse("instantMessages:deleteconversation"), body, headers=headers)
-
-        self.assertIs(r.status_code, status.HTTP_201_CREATED)
-
-    def test_authenticated_user_delete_conversation_with_missing_field(self):
-        """
-        Test that an authenticated user is able to create a conversation
-        Expecting 201 created
-        :return:
-        """
-        user_id = jwt.decode(self.token, options={"verify_signature": False})["sub"]
         headers = {
             'Authorization': f'Bearer {self.token}'
         }
         body = {}
-        r = client.post(reverse("instantMessages:deleteconversation"), body, headers=headers)
+        r = client.delete(
+            reverse(
+                "instantMessages:deleteconversation",
+                kwargs={'conversation_id': self.conversation_id}
+            ),
+            headers=headers
+        )
 
-        self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIs(r.status_code, status.HTTP_201_CREATED)
 
 
 class AddParticipantTestCase(TestCase):
@@ -139,10 +127,16 @@ class AddParticipantTestCase(TestCase):
             'Authorization': f'Bearer {self.token}'
         }
         body = {
-            "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0",
-            "conversation_id": self.conversation_id
+            "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0"
         }
-        r = client.post(reverse("instantMessages:addparticipant"), body, headers=headers)
+        r = client.post(
+            reverse(
+                "instantMessages:addparticipant",
+                kwargs={'conversation_id': self.conversation_id}
+            ),
+            body,
+            headers=headers
+        )
 
         self.assertIs(r.status_code, status.HTTP_201_CREATED)
 
@@ -155,10 +149,15 @@ class AddParticipantTestCase(TestCase):
         headers = {
             'Authorization': f'Bearer {self.token}'
         }
-        body = {
-            "participant_id": "d8c2ec28-b43a-4259-99fa-924be1bf4ac0"
-        }
-        r = client.post(reverse("instantMessages:addparticipant"), body, headers=headers)
+        body = {}
+        r = client.post(
+            reverse(
+                "instantMessages:addparticipant",
+                kwargs={'conversation_id': self.conversation_id}
+            ),
+            body,
+            headers=headers
+        )
 
         self.assertIs(r.status_code, status.HTTP_400_BAD_REQUEST)
 
