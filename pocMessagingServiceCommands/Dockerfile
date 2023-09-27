@@ -8,4 +8,4 @@ RUN pip install --upgrade pip \
 
 EXPOSE 80
 
-CMD python -m uvicorn pocMessagingServiceCommands.asgi:application --host 0.0.0.0
+CMD python -m uvicorn pocMessagingServiceCommands.asgi:application --host 0.0.0.0 --port 80
