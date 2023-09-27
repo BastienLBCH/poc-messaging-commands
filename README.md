@@ -12,7 +12,8 @@ This repo contains the command part, meaning that it takes commands and transfor
 ### Preparing
 **Prerequisite :** Having docker installed
 
-You need to create a .env file in the folder pocMessagingServiceCommands
+You need to create a .env file in the folder pocMessagingServiceCommands/pocMessagingServiceCommands at the same level than the settings.py file
+
 Options are :
 ```
 KEYCLOAK_PUBLIC_KEY
