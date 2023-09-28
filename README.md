@@ -109,7 +109,7 @@ Body :
 
 
 ### Add user to a conversation
-- **Endpoint**: /conversations/{conversation id}/participants
+- **Endpoint**: /conversations/{conversation id}/members
 - **Method**: POST
 
 Headers :
