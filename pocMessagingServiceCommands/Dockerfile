@@ -7,6 +7,7 @@ ENV KEYCLOAK_PUBLIC_KEY=""
 ENV KEYCLOAK_ALG=""
 ENV BOOTSTRAP_SERVER=""
 ENV TOPIC=""
+ENV ENV=""
 
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
