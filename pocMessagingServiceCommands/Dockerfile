@@ -3,11 +3,11 @@ FROM python:3.10-buster
 ADD . /app/
 WORKDIR /app
 
-ENV KEYCLOAK_PUBLIC_KEY=""
-ENV KEYCLOAK_ALG=""
-ENV BOOTSTRAP_SERVER=""
-ENV TOPIC=""
-ENV ENV=""
+ARG KEYCLOAK_PUBLIC_KEY=""
+ARG KEYCLOAK_ALG=""
+ARG BOOTSTRAP_SERVER=""
+ARG TOPIC=""
+ARG ENV=""
 
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
