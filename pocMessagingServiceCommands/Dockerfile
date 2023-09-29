@@ -3,6 +3,11 @@ FROM python:3.10-buster
 ADD . /app/
 WORKDIR /app
 
+ENV KEYCLOAK_PUBLIC_KEY=""
+ENV KEYCLOAK_ALG=""
+ENV KAFKA_BOOTSTRAP_SERVER=""
+ENV TOPIC=""
+
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
     && python manage.py migrate
