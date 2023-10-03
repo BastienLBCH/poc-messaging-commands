@@ -79,7 +79,7 @@ docker run -p 8000:8000 --name poc-messaging-service-command poc-messaging-servi
 
 
 ## Usage
-This API provides endpoints to create conversations, post messages and add a participant to a conversation.
+This API provides endpoints to create/delete conversations, post messages and add/remove a participant to/from a conversation.
 
 
 ### Create a conversation
@@ -105,6 +105,11 @@ Body :
 - **Endpoint**: /conversations/{conversation id}/delete
 - **Method**: DELETE
 
+Headers :
+
+| Attribute       |                  Value |
+|:----------------|-----------------------:|
+| Authorization   |  Bearer {access token} |    
 
 
 
@@ -127,6 +132,15 @@ Body :
 | participant_id  |           {Id of the user to add to the conversation} |
 
 
+### Remove user from a conversation
+- **Endpoint**: /conversations/{conversation id}/members/{user id}/remove
+- **Method**: POST
+
+Headers :
+
+| Attribute       |                  Value |
+|:----------------|-----------------------:|
+| Authorization   |  Bearer {access token} |
 
 
 
@@ -147,8 +161,6 @@ Body :
 | Attribute        |                                                 Value |
 |:-----------------|------------------------------------------------------:|
 | message_content  |                 {Message to send to the conversation} |
-
-
 
 
 
